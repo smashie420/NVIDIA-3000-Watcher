@@ -9,7 +9,7 @@
   
   <p>
     <img src="https://i.imgur.com/VOHG0Bx.gif" title="Example">
-  <img src="https://i.imgur.com/XbbM6Mc.png" title="Example">
+  <img src="https://i.imgur.com/LfJ6Q26.png" title="Example">
   </p>
 </div>
 
@@ -79,4 +79,4 @@ echo "[NVIDIA WATCHER INSTALLER] Finished! Please run pm2 start index.js"
   **A:** This is because you entered your username or password incorrectly! Please run `node database.js`<br>
   <br>
   **Q:** How would i know if this is running/working?<br>
-  **A:** You'll be able to tell if its running by checking the console, it should look something like this <br><img src="https://i.imgur.com/XbbM6Mc.png" style="align: center;">
+  **A:** You'll be able to tell if its running by checking the console, it should look something like this <br><img src="https://i.imgur.com/LfJ6Q26.png" style="align: center;">
