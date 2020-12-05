@@ -99,20 +99,9 @@ async function webScrape(url, callback) {
         callback(datahtml)
 }
 
-if (!fs.existsSync("data.json")) {
-    runScript("./database.js", function(err) {
-        if (err) throw err;
-        clearInterval(timer);
-        console.log(consoleTitle + "finished running database.js")
-    })
-} else {
-    myLoop()
-}
-
 var i = 0;
 var minutesToCoolDown = 5 // 5 minutes
-var MilisecondsToSec = minutesToCoolDown * 60000
-let inStocked = []
+var MilisecondsToMin = minutesToCoolDown * 60000
 
 function myLoop() {
     let rawdata = fs.readFileSync('data.json')
@@ -123,26 +112,23 @@ function myLoop() {
     let gmailPass = data['gmailPass']
 
     urlArr.forEach(async url => {
-        var timer = setInterval(async() => {
-            inStocked.forEach(element => {
-                if(element == url){ console.log(`${consoleTitle}${url}Is has already been sent`); return;}
-            });
-            await webScrape(url, async function(res){
-                let shortTitle = res.title.split(' ').slice(0,7).join(' ');
-                
-                if(res.button == "Add to Cart"){
+        var timer = await setInterval(async() => {
+            await webScrape(url, async function(res){ // Start the web scraping and return result
+                //res = { url, title, button }
+                let shortTitle = await res.title.split(' ').slice(0,7).join(' ') // Shortened title so its readable in SMS :D
+
+                if(res.button == "Add to Cart"){ // If button from bestBuy = Add to Cart then
                     let stockTxt = "IN STOCK".green
                     console.log(`${consoleTitle}${shortTitle} :: ${stockTxt} :: Run: ${i} :: Uptime:${await format(process.uptime())}`)
                     await sendMail(gmailUser, gmailPass, sms, `IN STOCK! ${shortTitle}`)
-                    inStocked.push(url)
                     let yellowtxt = `cooldown for ${minutesToCoolDown}m!`.yellow
                     console.log(`${consoleTitle}${shortTitle} is now on ${yellowtxt}`)
                     
-                    setTimeout(() => {
-                        inStocked = inStocked.filter(e => e !== url);
+                    await setTimeout(() => {
+                        let outOfCoolDownMagenta = consoleTitle + shortTitle.magenta + " is now out of cooldown" .magenta
+                        console.log(outOfCoolDownMagenta)
                         myLoop()
-                        
-                    }, MilisecondsToSec);
+                    }, MilisecondsToMin);
                     clearInterval(timer)
 
                 }else{
@@ -151,6 +137,16 @@ function myLoop() {
                 }
             })
             i++
-        }, 4000)
+        }, 2500)
     })
+}
+
+if (!fs.existsSync("data.json")) {
+    runScript("./database.js", function(err) {
+        if (err) throw err;
+        clearInterval(timer);
+        console.log(consoleTitle + "finished running database.js")
+    })
+} else {
+    myLoop()
 }
