@@ -143,7 +143,7 @@ function myLoop() {
                 try{
                     var webScrapeRes = await webScrape(url)  // Start the web scraping and return result || webScrapeRes = { url, title, button } 
                     if(webScrapeRes == null && webScrapeRes == "") {return}
-                    let shortTitle = webScrapeRes.title.split(' ').slice(0,7).join(' ') // Shortened title so its readable in SMS :D
+                    let shortTitle = await webScrapeRes.title.split(' ').slice(0,7).join(' ') // Shortened title so its readable in SMS :D
                     if(webScrapeRes.button == "Add to Cart"){ // If button from bestBuy = Add to Cart then
                         
                         console.log(`${consoleTitle}${shortTitle} :: ${colors.green("IN STOCK")} :: Run: ${i} :: Uptime: ${format(process.uptime())}`)
