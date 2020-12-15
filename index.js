@@ -5,7 +5,6 @@ const cheerio = require('cheerio') // Webscraping
 const nodemailer = require("nodemailer") // For sms
 let request = require("request"); // For url shortener
 const colors = require("colors")
-
 let consoleTitle = "[NVIDIA WATCHER] ".cyan
 
 function format(seconds) { //https://stackoverflow.com/questions/28705009/how-do-i-get-the-server-uptime-in-node-js
@@ -87,22 +86,37 @@ async function sendMail(gmailUser, gmailPass, recipiant, message) {
     }
 }
 
-async function webScrape(url, callback) {
-        const html = await axios.get(url);
-        const $ = await cheerio.load(html.data);
+async function webScrape(url) {
+    const html = await axios.get(url);
+    const $ = await cheerio.load(html.data);
 
-        var datahtml = {
-            url: url,
-            title: $('div.sku-title h1').text(),
-            button: $('div button.add-to-cart-button').text(),
-        }
-        callback(datahtml)
+    var datahtml = {
+        url: url,
+        title: $('div.sku-title h1').text(),
+        button: $('div button.add-to-cart-button').text(),
+    }
+    return datahtml
 }
 
-var i = 0;
-var minutesToCoolDown = 5 // 5 minutes
-var MilisecondsToMin = minutesToCoolDown * 60000
+async function writeLog(text){
+    let date_ob =  new Date();
+    // YYYY-MM-DD HH:MM:SS format
+    let formattedTime = date_ob.getFullYear() + "-" + ('0'+date_ob.getMonth()).slice(-2) + "-" + ('0'+date_ob.getDate()).slice(-2) + " " + ('0' + date_ob.getHours()).slice(-2) + ":" + ('0' + date_ob.getMinutes()).slice(-2) + ":" +  ('0'+date_ob.getSeconds()).slice(-2)  +  "       "
 
+    if(fs.existsSync("stock-logs.txt")){
+        fs.appendFile('stock-logs.txt', "\n"+formattedTime + text, function (err) {
+            if (err) throw (err)
+        })
+    }else{
+        fs.writeFile('stock-logs.txt', formattedTime + text, function (err) {
+            if (err) throw (err)
+        })
+    }
+}
+
+var checkEvery = 1000 * 2 // seconds
+var cooldownTime = 60000 * 5 // minutes
+var i = 0 // For counting how many times myloop() has looped
 function myLoop() {
     let rawdata = fs.readFileSync('data.json')
     let data = JSON.parse(rawdata)
@@ -111,41 +125,37 @@ function myLoop() {
     let gmailUser = data['gmailUser']
     let gmailPass = data['gmailPass']
 
-    urlArr.forEach(async url => {
-        var timer = await setInterval(async() => {
-            await webScrape(url, async function(res){ // Start the web scraping and return result
-                //res = { url, title, button }
-                let shortTitle = await res.title.split(' ').slice(0,7).join(' ') // Shortened title so its readable in SMS :D
+    urlArr.forEach( url => {
+        var timer = setInterval(async () => {
+            var webScrapeRes = await webScrape(url)  // Start the web scraping and return result || webScrapeRes = { url, title, button } 
 
-                if(res.button == "Add to Cart"){ // If button from bestBuy = Add to Cart then
-                    let stockTxt = "IN STOCK".green
-                    console.log(`${consoleTitle}${shortTitle} :: ${stockTxt} :: Run: ${i} :: Uptime:${await format(process.uptime())}`)
-                    await sendMail(gmailUser, gmailPass, sms, `IN STOCK! ${shortTitle}`)
-                    let yellowtxt = `cooldown for ${minutesToCoolDown}m!`.yellow
-                    console.log(`${consoleTitle}${shortTitle} is now on ${yellowtxt}`)
-                    
-                    await setTimeout(() => {
-                        let outOfCoolDownMagenta = consoleTitle + shortTitle.magenta + " is now out of cooldown" .magenta
-                        console.log(outOfCoolDownMagenta)
-                        myLoop()
-                    }, MilisecondsToMin);
-                    clearInterval(timer)
+            let shortTitle = webScrapeRes.title.split(' ').slice(0,7).join(' ') // Shortened title so its readable in SMS :D
+            if(webScrapeRes.button == "Add to Cart"){ // If button from bestBuy = Add to Cart then
+                
+                console.log(`${consoleTitle}${shortTitle} :: ${colors.green("IN STOCK")} :: Run: ${i} :: Uptime: ${format(process.uptime())}`)
+                console.log(colors.yellow(`${consoleTitle}${shortTitle} is now on  cooldown for ${cooldownTime / 60000 }m!`)) // CooldownTime is divided by 60000 because time math
+                await sendMail(gmailUser, gmailPass, sms, `IN STOCK! ${shortTitle}`)
+                await writeLog("[STOCK] " + shortTitle) // Writes to stock-logs.txt
 
-                }else{
-                    let outOfStockTxt = "OUT OF STOCK".red
-                    console.log(consoleTitle + `${shortTitle} :: ${outOfStockTxt} :: Run: ${i} :: Uptime:${await format(process.uptime())}`)
-                }
-            })
+                await setTimeout(() => {
+                    console.log(colors.magenta(`${consoleTitle}${shortTitle} is now out of cooldown` ))
+                    myLoop()
+                }, cooldownTime);
+                
+                await clearInterval(timer)
+            }else{
+                console.log(`${consoleTitle}${shortTitle} :: ${colors.red("OUT OF STOCK")} :: Run: ${i} :: Uptime: ${format(process.uptime())}`)
+            }
             i++
-        }, 2500)
+        }, checkEvery)
     })
+    
 }
-
 if (!fs.existsSync("data.json")) {
     runScript("./database.js", function(err) {
         if (err) throw err;
         clearInterval(timer);
-        console.log(consoleTitle + "finished running database.js")
+        console.log(`${consoleTitle}finished running database.js`)
     })
 } else {
     myLoop()
