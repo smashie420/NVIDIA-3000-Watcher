@@ -13,7 +13,7 @@
     <img src="https://i.imgur.com/x0jizaF.png" title="Example">
   </p>
 </div>
-**This only works for https://bestbuy.com**
+This only works for https://bestbuy.com
 
 ##
 # What this will do
