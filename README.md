@@ -23,11 +23,12 @@
   * Automaticlly buy a listing from the shop
   > Im very against this since other people wont have a chance to get a card if people botted listings
   
-## Windows Requirements
-- [Node JS Installed](https://nodejs.org/en/download/)
-- [Git Installed](https://git-scm.com/downloads)
+
 
 # Windows Installation
+  ## Requirements
+   - [Node JS Installed](https://nodejs.org/en/download/)
+   - [Git Installed](https://git-scm.com/downloads)
 ```bash
 git clone https://github.com/smashie420/NVIDIA-3000-Watcher
 cd NVIDIA-3000-Watcher
