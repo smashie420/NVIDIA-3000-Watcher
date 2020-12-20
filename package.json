@@ -8,6 +8,7 @@
     "cheerio": "^1.0.0-rc.3",
     "child_process": "^1.0.2",
     "colors": "^1.4.0",
+    "discord-webhook-node": "^1.1.8",
     "elasticemail": "^0.2.0",
     "fs": "0.0.1-security",
     "nodemailer": "^6.4.16",
