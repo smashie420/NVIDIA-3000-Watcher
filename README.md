@@ -10,7 +10,8 @@
   <p>
     <img src="https://i.imgur.com/VOHG0Bx.gif" title="Example">
     <img src="https://i.imgur.com/L0iyxC0.gif" title="Example">
-    <img src="https://i.imgur.com/x0jizaF.png" title="Example">
+    <img src="https://i.imgur.com/RzV84pT.png" title="Example">
+    <img src="https://i.imgur.com/mXGCtr1.png" title="Example">
   </p>
 </div>
 This only works for https://bestbuy.com
