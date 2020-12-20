@@ -15,13 +15,12 @@
 </div>
 This only works for https://bestbuy.com
 
-##
 # What this will do
   * Automaticlly send you a text once product is in stock
 # What this wont do
   * Automaticlly buy a listing from the shop
   > Im very against this since other people wont have a chance to get a card if people botted listings
-##
+
 
 
 # Windows Installation
