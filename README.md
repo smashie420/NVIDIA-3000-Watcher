@@ -26,9 +26,8 @@
 
 
 # Windows Installation
-  ## Requirements
-   - [Node JS Installed](https://nodejs.org/en/download/)
-   - [Git Installed](https://git-scm.com/downloads)
+- [Node JS Installed](https://nodejs.org/en/download/)
+- [Git Installed](https://git-scm.com/downloads)
 ```bash
 git clone https://github.com/smashie420/NVIDIA-3000-Watcher
 cd NVIDIA-3000-Watcher
