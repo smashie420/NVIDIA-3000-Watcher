@@ -67,9 +67,9 @@ echo "[NVIDIA WATCHER INSTALLER] Finished! Please run pm2 start index.js"
 
 # Usage
   ## Windows
-  | Command (In cmd or powershell) | Description |
-  | --- | --- |
-  | `node index.js` | Runs the program & auto notifies you when products are in stock |
+  | Command (In cmd or powershell) | Description | Extras (optional) |
+  | --- | --- | --- |
+  | `node index.js` | Runs the program & auto notifies you when products are in stock | Make sure your in the NVIDIA-3000-Watcher directory |
     
   ## Linux 
   | Command  | Description | Extras (optional) |
