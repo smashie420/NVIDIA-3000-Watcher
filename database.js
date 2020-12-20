@@ -3,6 +3,7 @@ const fs = require("fs")
 const path = require('path')
 const nodemailer = require("nodemailer") // For sms
 const colors = require("colors")
+const { Webhook, MessageBuilder } = require('discord-webhook-node');
 
 let consoleTitle = "[NVIDIA WATCHER] ".cyan
 const rl = readline.createInterface({
@@ -68,15 +69,40 @@ function enterMoreUrls(){
 function askWebhook(){
   rl.question(`${consoleTitle}Do you want to use discord webhooks? (y/n): `, function saveInput(webhooksOption){
     if(stringToBoolean(webhooksOption)){
-      rl.question(`${consoleTitle} Enter Webhook URL: `, function saveInput(webhookURL){
-        discrodWebHook = webhookURL
-        runQuestions()
+      rl.question(`${consoleTitle}Enter Webhook URL: `, function saveInput(webhookURL){
+        rl.question(`${consoleTitle}Do you want to test the discord webhook? (y/n): `, function saveInput(testWebhook){
+          if(stringToBoolean(testWebhook)){
+            testDiscordWebhook(webhookURL)
+          }
+          discrodWebHook = webhookURL
+          runQuestions()
+        })
       })
     }else{
       discrodWebHook = ""
       runQuestions()
     }
   })
+}
+function testDiscordWebhook(hookUrl){
+    const hook = new Webhook(hookUrl);
+    const IMAGE_URL = 'https://viterbicareers.usc.edu/wp-content/uploads/2019/01/Nvidia-Logo.jpg';
+    hook.setUsername('NVIDIA WATCHER');
+    hook.setAvatar(IMAGE_URL);
+
+    const embed = new MessageBuilder()
+    .setTitle('🤖 WEBHOOK TEST')
+    .setDescription(`If you see this, this means that the webhook is setup and ready to go!, look at readme.md for info on how to run me`)
+    .setURL(`https://github.com/smashie420/NVIDIA-3000-Watcher`)
+    .setColor('#add8e6')
+    .setFooter('Made by smashguns#6175', 'https://cdn.discordapp.com/avatars/242889488785866752/40ee66d845e1a6341e03c450fcf6d221.png?size=256')
+    .setTimestamp();
+
+    hook.send(embed).catch(error =>{
+        if(error){
+            console.error(error)
+        }
+    })
 }
 
 function runQuestions(){
