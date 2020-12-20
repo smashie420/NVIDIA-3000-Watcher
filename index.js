@@ -188,12 +188,12 @@ function sendWebHook(hookUrl, productSite, productURL, productShortTitle, produc
 
     const embed = new MessageBuilder()
     .setTitle('📈 STONK ALERT ' + formattedTime)
-    .setDescription(` <@242889488785866752> \`${productSite.toUpperCase()} ${productShortTitle}\` **IS IN STOCK**`)
+    //.setDescription(` <@242889488785866752> \`${productSite.toUpperCase()} ${productShortTitle}\` **IS IN STOCK**`)
     .setURL(`${productURL}`)
     .setColor('#33FF00')
     
-    .addField('Product', `${productShortTitle}`, true)
-    .addField('Price', `${productPrice}`, true)
+    .addField('Product', `\`${productShortTitle}\``, true)
+    .addField('Price', `\`${productPrice}\``, true)
     .addField('Reviews', `${stars}`, true)
     .setFooter('Made by smashguns#6175', 'https://cdn.discordapp.com/avatars/242889488785866752/40ee66d845e1a6341e03c450fcf6d221.png?size=256')
     .setTimestamp();
