@@ -49,17 +49,20 @@ echo "[NVIDIA WATCHER INSTALLER] Finished! Please run pm2 start index.js"
 ```
 > If you wish to change/remove settings please run database.js `node database.js`
 
-# Phone Requirements
+# Supported Phone Carriers
   I took advantage of Email to SMS Gateways which i found [here](https://en.wikipedia.org/wiki/SMS_gateway), you are required one of the listed carriers, if your carrier isnt listed please [open a issue](https://github.com/smashie420/NVIDIA-3000-Watcher/issues/new)
-  * AT&T
-  * Verizon
-  * Sprint
-  * TMobile
-  * Virgin Mobile
-  * Nextel
-  * Boost
-  * Alltel
-  * EE
+  | Carrier | Supported | Desciption (optional) |
+  | --- | --- | --- |
+  | AT&T | ✔ |  |
+  | Verizon | ✔ |  
+  | Sprint | ✔ | 
+  | TMobile | ✔ | 
+  | Virgin Mobile | ✔ | 
+  | Nextel | ✔ | 
+  | Boost | ✔ | 
+  | Alltel | ✔ | 
+  | EE | ✔ | 
+  | TelCel | ❌ | Carrier has spam filters which dont allow the program to send sms, Use discord webhooks instead!
 
 
 # Usage
