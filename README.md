@@ -35,6 +35,8 @@ cd NVIDIA-3000-Watcher
 node index.js
 ```
 
+
+
 # Linux Installation
 ```bash
 curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -   && \
