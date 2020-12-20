@@ -67,12 +67,17 @@ echo "[NVIDIA WATCHER INSTALLER] Finished! Please run pm2 start index.js"
 
 # Usage
   ## Windows
-  `node index.js`
+  | Command (In cmd or powershell) | Description |
+  | --- | --- |
+  | `node index.js` | Runs the program & auto notifies you when products are in stock |
     
   ## Linux 
-  **Start:** `pm2 start index.js` > Make sure your in the NVIDIA-3000-Watcher directory<br>
-  **Stop:** `pm2 stop all`<br>
-  **View Logs:** pm2 logs<br>
+  | Command  | Description | Extras (optional) |
+  | --- | --- | --- |
+  | `pm2 start index.js` | Runs the program | Make sure your in the NVIDIA-3000-Watcher directory |
+  | `pm2 stop index` | Stops the program
+  | `pm2 logs` | Shows the logs |
+
     
 # FAQ
   **Q:** Why do you need my gmail username and password?<br>
