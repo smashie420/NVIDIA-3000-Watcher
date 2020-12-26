@@ -150,7 +150,7 @@ async function webScrape(url) {
 async function writeLog(text){
     let date_ob =  new Date();
     // YYYY-MM-DD HH:MM:SS format
-    let formattedTime = date_ob.getFullYear() + "-" + ('0'+date_ob.getMonth()).slice(-2) + "-" + ('0'+date_ob.getDate()).slice(-2) + " " + ('0' + date_ob.getHours()).slice(-2) + ":" + ('0' + date_ob.getMinutes()).slice(-2) + ":" +  ('0'+date_ob.getSeconds()).slice(-2)  +  "       "
+    let formattedTime = date_ob.getFullYear() + "-" + (date_ob.getMonth() + 1) + "-" + ('0'+date_ob.getDate()).slice(-2) + " " + ('0' + date_ob.getHours()).slice(-2) + ":" + ('0' + date_ob.getMinutes()).slice(-2) + ":" +  ('0'+date_ob.getSeconds()).slice(-2)  +  "       "
 
     if(fs.existsSync("stock-logs.txt")){
         fs.appendFile('stock-logs.txt', "\n"+formattedTime + text, function (err) {
