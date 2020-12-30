@@ -38,7 +38,8 @@ node index.js
 # Linux Installation
 ```bash
 curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -   && \
-sudo apt-get install nodejs pm2 git make curl yarn curl -y        && \
+sudo apt-get install nodejs git make curl yarn curl -y            && \
+npm install -g pm2 yarn                                           && \
 cd ~                                                              && \
 git clone https://github.com/smashie420/NVIDIA-3000-Watcher       && \
 cd NVIDIA-3000-Watcher                                            && \
