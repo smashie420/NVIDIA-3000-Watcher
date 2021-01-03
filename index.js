@@ -195,7 +195,7 @@ function sendWebHook(hookUrl, productSite, productURL, productShortTitle, produc
     .addField('Product', `\`${productShortTitle}\``, true)
     .addField('Price', `\`${productPrice}\``, true)
     .addField('Reviews', `${stars}`, true)
-    .setFooter('Made by smashguns#6175', 'https://cdn.discordapp.com/avatars/242889488785866752/40ee66d845e1a6341e03c450fcf6d221.png?size=256')
+    .setFooter('Made by smashguns#6175', 'https://cdn.discordapp.com/avatars/242889488785866752/a_b10cbd07f0e594f669179b7b58ce721e.gif?size=256&f=.gif')
     .setTimestamp();
 
     hook.send(embed).catch(error =>{
@@ -257,7 +257,6 @@ async function myLoop() {
 if (!fs.existsSync("data.json")) {
     runScript("./database.js", function(err) {
         if (err) throw err;
-        clearInterval(timer);
         console.log(`${consoleTitle}finished running database.js`)
     })
 } else {
