@@ -37,14 +37,14 @@ node index.js
 
 # Linux Installation
 ```bash
-curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -   && \
-sudo apt-get install nodejs git make curl -y                      && \
-sudo npm install -g pm2 yarn                                           && \
-cd ~                                                              && \
-git clone https://github.com/smashie420/NVIDIA-3000-Watcher       && \
-cd NVIDIA-3000-Watcher                                            && \
-yarn install --production                                         && \
-node database.js                                                  && \
+curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -         && \
+sudo apt-get install nodejs git make curl -y                            && \
+sudo npm install -g pm2 yarn                                            && \
+cd ~                                                                    && \
+git clone https://github.com/smashie420/NVIDIA-3000-Watcher             && \
+cd NVIDIA-3000-Watcher                                                  && \
+npm install                                                             && \
+node database.js                                                        && \
 echo "[NVIDIA WATCHER INSTALLER] Finished! Please run pm2 start index.js"
 ```
 > If you wish to change/remove settings please run database.js `node database.js`
