@@ -165,7 +165,7 @@ async function writeLog(text){
 
 function checkStockTxt(txtFromSite){
     switch(txtFromSite.trim()){
-        case "In stock.": case "Add to Cart": return true;
+        case "In stock.": case "Add to Cart": case "Check Stores": return true;
         default: return false;
     }
 }
