@@ -3,6 +3,12 @@
     <img src="https://i.imgur.com/Wosx75V.png" title="Logo">
   </p>
 
+  <p>
+    <img src="https://img.shields.io/github/stars/smashie420/NVIDIA-3000-Watcher?style=for-the-badge">
+    <img src="https://img.shields.io/github/license/smashie420/NVIDIA-3000-Watcher?style=for-the-badge">
+    <img src="https://img.shields.io/bitbucket/issues-raw/smashie420/NVIDIA-3000-Watcher?style=for-the-badge">
+    
+  </p>
   <p style="text-align: center;">
     <h2>A simple site watcher that send SMS notifications</h2>
   </p>
