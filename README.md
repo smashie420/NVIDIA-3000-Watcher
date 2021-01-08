@@ -11,6 +11,7 @@
   </p>
   <p style="text-align: center;">
     <h2>A simple site watcher that send SMS notifications</h2>
+    <small>Please ⭐ my projects :D</small>
   </p>
   
   <p>
