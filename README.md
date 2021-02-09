@@ -4,6 +4,8 @@
   </p>
 
   <p>
+    <!--<a href="https://www.npmjs.com/package/@liamcottle/rustplus.js"><img src="https://img.shields.io/npm/dt/@liamcottle/rustplus.js" alt="npm"/></a>-->
+    <a href="https://discord.gg/GvEMJ9d"><img src="https://img.shields.io/badge/Discord-Liam%20Cottle%230001-%237289DA?style=for-the-badge&logo=discord" alt="discord"/>
     <img src="https://img.shields.io/github/stars/smashie420/NVIDIA-3000-Watcher?style=for-the-badge">
     <img src="https://img.shields.io/github/license/smashie420/NVIDIA-3000-Watcher?style=for-the-badge">
     <img src="https://img.shields.io/bitbucket/issues-raw/smashie420/NVIDIA-3000-Watcher?style=for-the-badge">
