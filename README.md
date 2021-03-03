@@ -3,8 +3,17 @@
     <img src="https://i.imgur.com/Wosx75V.png" title="Logo">
   </p>
 
+  <p>
+    <!--<a href="https://www.npmjs.com/package/@liamcottle/rustplus.js"><img src="https://img.shields.io/npm/dt/@liamcottle/rustplus.js" alt="npm"/></a>-->
+    <a href="https://discord.gg/GvEMJ9d"><img src="https://img.shields.io/badge/Discord-smashguns%236175-%237289DA?style=for-the-badge&logo=discord" alt="discord"/></a>
+    <img src="https://img.shields.io/github/stars/smashie420/NVIDIA-3000-Watcher?style=for-the-badge">
+    <img src="https://img.shields.io/github/license/smashie420/NVIDIA-3000-Watcher?style=for-the-badge">
+    <img src="https://img.shields.io/bitbucket/issues-raw/smashie420/NVIDIA-3000-Watcher?style=for-the-badge">
+    
+  </p>
   <p style="text-align: center;">
     <h2>A simple site watcher that send SMS notifications</h2>
+    <small>Please ⭐ my projects :D</small>
   </p>
   
   <p>
@@ -12,6 +21,7 @@
     <img src="https://i.imgur.com/VjUuVUt.gif" title="Example">
     <img src="https://i.imgur.com/RzV84pT.png" title="Example">
     <img src="https://i.imgur.com/mXGCtr1.png" title="Example">
+    <img src="https://i.imgur.com/FcrTpdS.png" title="Example">
   </p>
 </div>
 This only works for https://bestbuy.com
@@ -37,14 +47,14 @@ node index.js
 
 # Linux Installation
 ```bash
-curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -   && \
-sudo apt-get install nodejs git make curl -y                      && \
-sudo npm install -g pm2 yarn                                           && \
-cd ~                                                              && \
-git clone https://github.com/smashie420/NVIDIA-3000-Watcher       && \
-cd NVIDIA-3000-Watcher                                            && \
-yarn install --production                                         && \
-node database.js                                                  && \
+curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -            && \
+sudo apt-get install nodejs git make curl -y                            && \
+sudo npm install -g pm2 yarn                                            && \
+cd ~                                                                    && \
+git clone https://github.com/smashie420/NVIDIA-3000-Watcher             && \
+cd NVIDIA-3000-Watcher                                                  && \
+npm install                                                             && \
+node database.js                                                        && \
 echo "[NVIDIA WATCHER INSTALLER] Finished! Please run pm2 start index.js"
 ```
 > If you wish to change/remove settings please run database.js `node database.js`
