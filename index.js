@@ -195,7 +195,7 @@ function sendWebHook(hookUrl, productSite, productURL, productShortTitle, produc
     .addField('Product', `\`${productShortTitle}\``, true)
     .addField('Price', `\`${productPrice}\``, true)
     .addField('Reviews', `${stars}`, true)
-    .setFooter('Made by smashguns#6175', 'https://cdn.discordapp.com/avatars/242889488785866752/a_b10cbd07f0e594f669179b7b58ce721e.gif?size=256&f=.gif')
+    .setFooter('Made by smashguns#6175', 'https://cdn.discordapp.com/avatars/242889488785866752/a_4f1fac503d4d074585a697083c62e410.gif?size=128')
     .setTimestamp();
 
     hook.send(embed).catch(error =>{
@@ -221,14 +221,12 @@ const inCoolDownArr = new Set();
 
 async function myLoop() {
     let rawdata = fs.readFileSync('data.json')
-    let data = JSON.parse(rawdata)
-    let urlArr = data["url"]
-    let reciever = data["sms"]
-    let gmailUser = data['gmailUser']
-    let gmailPass = data['gmailPass']
-    let webhook = data['discordwebhook']
-    
-    
+    let dataJson = JSON.parse(rawdata)
+    let urlArr = dataJson["url"]
+    let reciever = dataJson["sms"]
+    let gmailUser = dataJson['gmailUser']
+    let gmailPass = dataJson['gmailPass']
+    let webhook = dataJson['discordwebhook']
 
     await urlArr.forEach( async function(url, index) {
         setInterval(async function(){
@@ -243,7 +241,12 @@ async function myLoop() {
                     console.log(colors.yellow(`${consoleTitle}[${data.site.toUpperCase()}] ${data.shortTitle} is now on cooldown for ${cooldownTime / 60000 }m!`)) // CooldownTime is divided by 60000 because time math
                     await sendMail(gmailUser, gmailPass, reciever, `IN STOCK! [${data.site.toUpperCase()}] ${data.shortTitle}`) // Sends mail to recipiant which is in data.json
                     await writeLog(`[STOCK] [${data.site.toUpperCase()}] ${data.shortTitle}`) // Writes to stock-logs.txt
-                    if(webhook){ sendWebHook(webhook, data.site, data.url, data.shortTitle, data.price, data.rating)} // Sends webhook
+                    
+                    if(webhook){ 
+                        webhook.forEach((indivdualHook)=>{
+                            sendWebHook(indivdualHook, data.site, data.url, data.shortTitle, data.price, data.rating) // Sends webhook
+                        })
+                    }
                     await cooldown(url) // Runs cooldown
                     
                 }

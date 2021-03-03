@@ -46,7 +46,7 @@ async function sendMail(data){
     }
 }
 let urls = [];
-let discrodWebHook;
+let discrodWebHook = [];
 
 function starter(){
   rl.question(consoleTitle + "Enter Url: ", function saveInput(url){
@@ -70,20 +70,37 @@ function askWebhook(){
   rl.question(`${consoleTitle}Do you want to use discord webhooks? (y/n): `, function saveInput(webhooksOption){
     if(stringToBoolean(webhooksOption)){
       rl.question(`${consoleTitle}Enter Webhook URL: `, function saveInput(webhookURL){
-        rl.question(`${consoleTitle}Do you want to test the discord webhook? (y/n): `, function saveInput(testWebhook){
-          if(stringToBoolean(testWebhook)){
-            testDiscordWebhook(webhookURL)
-          }
-          discrodWebHook = webhookURL
-          runQuestions()
-        })
+        discrodWebHook.push(webhookURL)
+        askMoreHooks()
       })
     }else{
-      discrodWebHook = ""
       runQuestions()
     }
   })
 }
+console.log(discrodWebHook)
+function askMoreHooks(){
+  rl.question(`${consoleTitle}Do you want to add more hooks? (y/n): `, function saveInput(inputforHook){
+    if(stringToBoolean(inputforHook)){
+      rl.question(`${consoleTitle}Enter Webhook URL: `, function saveInput(webhookURL){
+        discrodWebHook.push(webhookURL)
+        askMoreHooks()
+      })
+    }else{
+      rl.question(`${consoleTitle}Do you want to test the discord webhook? (y/n): `, function saveInput(testWebhook){
+        if(stringToBoolean(testWebhook)){
+          discrodWebHook.forEach((dataHook)=>{
+              testDiscordWebhook(dataHook)
+          })
+          runQuestions()
+        }else{
+          runQuestions()
+        }
+      })
+    }
+  })
+}
+
 function testDiscordWebhook(hookUrl){
     const hook = new Webhook(hookUrl);
     const IMAGE_URL = 'https://viterbicareers.usc.edu/wp-content/uploads/2019/01/Nvidia-Logo.jpg';
@@ -95,7 +112,7 @@ function testDiscordWebhook(hookUrl){
     .setDescription(`If you see this, this means that the webhook is setup and ready to go!, look at readme.md for info on how to run me`)
     .setURL(`https://github.com/smashie420/NVIDIA-3000-Watcher`)
     .setColor('#add8e6')
-    .setFooter('Made by smashguns#6175', 'https://cdn.discordapp.com/avatars/242889488785866752/40ee66d845e1a6341e03c450fcf6d221.png?size=256')
+    .setFooter('Made by smashguns#6175', 'https://cdn.discordapp.com/avatars/242889488785866752/a_4f1fac503d4d074585a697083c62e410.gif?size=128')
     .setTimestamp();
 
     hook.send(embed).catch(error =>{
