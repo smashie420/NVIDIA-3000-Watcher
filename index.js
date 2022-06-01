@@ -205,6 +205,7 @@ function sendWebHook(hookUrl, productSite, productURL, productShortTitle, produc
     })
 }
 
+
 // https://stackoverflow.com/questions/48432102/discord-js-cooldown-for-a-command-for-each-user-not-all-users  
 // Thanks for posting that ^ ive been using arrays instead of sets which breaks stuff
 function cooldown(url){
